@@ -12,14 +12,22 @@
     <body>
         <div class="app">
             
-            <h1>Hockey Heroes Contact Manager</h1>
-            <div id="contact_list">
-            	<h1>TODO add contact list html</h1>
+            <h5>Enter Name to Search for.</h5>
+        	<input type="text" id="contact_name" value="Thomas">
+			<button id="search_button">Search</button>
+
+            <div id="contact_list_div">
+            	<!--<h1>TODO add contact list html</h1>-->
+            	<ul id="contact_list"> </ul>
             </div>
-            <div id="contact_form">
-            	<h1>TODO add contact form html</h1>
+            <div id="contact_form_div">
+            	<!--<h1>TODO add contact form html</h1>-->
+            	<form id="contact_form" action="">
+            	</form>
             </div>
-            <div id="deviceready"></div>
+            <div id="deviceready">
+				<!-- Debug button goes here -->
+            </div>
 
         </div>
         <script type="text/javascript" src="cordova.js"></script>
@@ -27,11 +35,7 @@
         <script type="text/javascript" src="js/model.js"></script>
         <script type="text/javascript" src="js/view.js"></script>
         <script type="text/javascript" src="js/sim.js"></script>
-        <script type="text/javascript">
-        
-            controller.init();
-            model.init();
-			view.init("contact_list", "contact_form");
-        </script>
+        <!--Note inline javascript was removed from here due to Firefox OS security constrictions
+        	related to the Contacts plugin-->
     </body>
 </html>
