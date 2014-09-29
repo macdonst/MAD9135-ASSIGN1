@@ -47,11 +47,29 @@ var model = {
 			//Add the hockey heroes to the list
 		}
 	    console.log("Get Name And Address for: " + name);
+		//var options      = new ContactFindOptions();
+		//options.filter   = name;
+		//options.multiple = true;
+		//options.desiredFields = [navigator.contacts.fieldType.id];
+		//var fields = [navigator.contacts.fieldType.displayName];
+		
+		//var options      = new ContactFindOptions();
+		//options.filter   = name;
+		//options.multiple = true;
+		//options.desiredFields = [navigator.contacts.fieldType.id];
+		//var fields       = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
+		
+		//var options = new ContactFindOptions();
+		//options.filter = name;
+		//var fields = ["displayName", "addresses"];
+		//var fields = [navigator.contacts.fieldType.name];
+		
 		var options      = new ContactFindOptions();
 		options.filter   = name;
 		options.multiple = true;
-		options.desiredFields = [navigator.contacts.fieldType.id];
+		//options.desiredFields = [navigator.contacts.fieldType.id];
 		var fields = [navigator.contacts.fieldType.name];
+		
 		//Do not use navigator.contacts.fieldType.displayName
 		//FFOS ContactProxy: Unable to search by displayName on FFOS 1.2
 		//var fields = [navigator.contacts.fieldType.displayName];		
@@ -79,11 +97,12 @@ var model = {
     {
     	console.log("Get Contact Info for: " + id);
 		var options      = new ContactFindOptions();
-		options.filter   = id;
-		options.multiple = true;
+		options.filter   = ""; //id;
+		//options.multiple = true;
 		//options.desiredFields = [navigator.contacts.fieldType.id];
-		var fields = [navigator.contacts.fieldType.name];
-		navigator.contacts.find(fields,
+		//var fields = [navigator.contacts.fieldType.name];
+		var filter = ["displayName","addresses"];
+		navigator.contacts.find(filters,
 		function(contacts) //Success Callback
 		{
 			if(contacts.length > 1)

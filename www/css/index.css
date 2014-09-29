@@ -1,0 +1,163 @@
+*{
+    margin:0px;
+    padding:0px;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-tap-highlight-color: transparent;
+
+}
+
+
+
+body{
+    background: #F2EBC7;
+}
+
+
+/******************* Main Page Style ************************/
+#header{
+    width:100%;
+    position: fixed;
+    z-index:1000;
+    background: #962D3E;
+    border-bottom: 1px solid #343642;
+
+}
+
+#header h1{
+    width:77%;
+    font-family: 'Racing Sans One', cursive;
+    color:#fff;
+    background: #962D3E;
+    font-size:1.5em;
+    padding: 2%;
+    padding-bottom: 3%;
+    float:left;
+    margin-left:10px;
+}
+
+#header .header_btn{
+    
+    padding-top:10px;
+    width:25px;
+
+}
+
+#contact_list_{
+    padding-top:47px;
+    padding-left:0.5%;
+    padding-right:0.5%;
+    margin-bottom:2%;
+}
+
+#contact_form{
+    padding-top:47px;
+    padding-left:0.5%;
+    padding-right:0.5%;
+    margin-bottom:2%;
+}
+
+
+.contact_box{
+    width:32.333333%;
+    height:100px;
+    background-color: #7bb1ff;
+    margin-left:0.5%;
+    margin-right:0.5%;
+    margin-top:1%;
+    float:left;
+    background:url("/img/contact.png") no-repeat;
+    background-size: 100%;
+    position:relative;
+}
+
+.add_contact_btn{
+    width:32.333333%;
+    height:100px;
+    background-color: #7bb1ff;
+    margin-left:0.5%;
+    margin-right:0.5%;
+    margin-top:1%;
+    float:left;
+    background:url("/img/addcontact.png") no-repeat;
+    background-size: 100%;
+    position:relative;
+}
+
+.name{
+    font-family: 'Roboto Condensed', sans-serif;
+    width:100%;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    color:#D7DEDE;
+    font-size:0.8em;
+}
+
+
+/******************* Form Style ************************/
+
+.basic-grey {
+    margin-left:auto;
+    margin-right:auto;
+    max-width: 500px;
+    padding: 25px 15px 25px 10px;
+    font: 12px Georgia, "Times New Roman", Times, serif;
+    color: #888;
+    text-shadow: 1px 1px 1px #FFF;
+}
+.basic-grey h1 {
+    font-size: 25px;
+    padding: 0px 0px 10px 40px;
+    display: block;
+    border-bottom:1px solid #E4E4E4;
+    margin: -10px -15px 30px -10px;;
+    color: #888;
+}
+.basic-grey h1>span {
+    display: block;
+    font-size: 11px;
+}
+.basic-grey label {
+    display: block;
+    margin: 0px;
+}
+.basic-grey label>span {
+    float: left;
+    width: 25%;
+    text-align: right;
+    padding-right: 10px;
+    margin-top: 8px;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 1.2em;
+    color: #343642;
+}
+.basic-grey input[type="text"], .basic-grey input[type="email"], .basic-grey input[type="tel"], .basic-grey select {
+    border: 1px solid #DADADA;
+    color: #888;
+    height: 25px;
+    margin-bottom: 16px;
+    margin-right: 6px;
+    margin-top: 2px;
+    outline: 0 none;
+    padding: 3px 3px 3px 5px;
+    width: 60%;
+    font-size: 12px;
+    line-height:15px;
+    box-shadow: inset 0px 1px 4px #ECECEC;
+    -moz-box-shadow: inset 0px 1px 4px #ECECEC;
+    -webkit-box-shadow: inset 0px 1px 4px #ECECEC;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+
+.basic-grey .button {
+    background: #343642;
+    border: none;
+    padding: 10px 25px 10px 25px;
+    color: #FFF;
+    box-shadow: 1px 1px 5px #B6B6B6;
+    border-radius: 3px;
+    text-shadow: 1px 1px 1px #9E3F3F;
+    font-family: 'Roboto Condensed', sans-serif;
+    margin-left:66.5%;
+}

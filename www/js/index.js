@@ -28,6 +28,7 @@ var controller = {
     //The contact list is ready
     onContactListReady: function()
     {
+    	//The contact list is ready
     	//Hand the array off to the view to draw it    	
     	view.drawContactList(model.getContactList());
     	//Add event listener for list item clicks

@@ -14,6 +14,9 @@ var view = {
     },
     drawContactList: function(contacts)
     {
+		//This is simple example code showing how to loop through the 
+		//contacts array and extract the displayName and id
+		
 		//Save this for future use
 		this.contacts = contacts;
 		//Build the html
@@ -24,6 +27,7 @@ var view = {
 			html += '<li id="' + contact.id + '">' + contact.displayName + '</li>';
     	}
 		html += '</ul>';
+		//Save the html to the contact list element
 		this.contact_list_element.innerHTML = html;	
     },
     clearContactList: function()

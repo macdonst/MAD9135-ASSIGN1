@@ -6,29 +6,87 @@
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed|Racing+Sans+One' rel='stylesheet' type='text/css'>
         <meta name="msapplication-tap-highlight" content="no" />
         <title>Hello World</title>
     </head>
     <body>
         <div class="app">
-            
             <h5>Enter Name to Search for.</h5>
         	<input type="text" id="contact_name" value="Thomas">
 			<button id="search_button">Search</button>
+            <div data-role="page" class="active"  id="page1">
+                
+                <div id="header1"><h1>Contact Manager</h1><a href=""><img src="img/add_btn.png" class="header_btn"/></a></div>
 
-            <div id="contact_list_div">
-            	<!--<h1>TODO add contact list html</h1>-->
-            	<ul id="contact_list"> </ul>
+                <div id="contact_list_">
+                    <div class="contact_box"><h2 class="name">Richard Jackson</h2></div>
+                    <div class="contact_box"><h2 class="name">Warren Butland</h2></div>
+                    <div class="contact_box"><h2 class="name">Ian Macdonald</h2></div>
+                    <div class="contact_box"><h2 class="name">Thomas Wiegand</h2></div>
+                    <div class="contact_box"><h2 class="name">Richard Jackson</h2></div>
+                    <div class="contact_box"><h2 class="name">Warren Butland</h2></div>
+                    <div class="contact_box"><h2 class="name">Ian Macdonald</h2></div>
+                    <div class="contact_box"><h2 class="name">Thomas Wiegand</h2></div>
+                    <div class="contact_box"><h2 class="name">Richard Jackson</h2></div>
+                    <div class="contact_box"><h2 class="name">Warren Butland</h2></div>
+                    <div class="contact_box"><h2 class="name">Ian Macdonald</h2></div>
+                    <div class="contact_box"><h2 class="name">Thomas Wiegand</h2></div>
+                    <a href=""><div class="add_contact_btn"></div></a>
+               </div>
+            
             </div>
-            <div id="contact_form_div">
-            	<!--<h1>TODO add contact form html</h1>-->
-            	<form id="contact_form" action="">
-            	</form>
-            </div>
-            <div id="deviceready">
-				<!-- Debug button goes here -->
-            </div>
+            <div data-role="page" id="page2">
+                
+                <div id="header2"><h1>Add Contact</h1><a href=""><img src="img/back_btn.png" class="header_btn"/></a></div>
+                
+                <div id="contact_form">
+                    <form action="" method="post" class="basic-grey">
+            
+                        <label>
+                            <span>First Name </span>
+                            <input id="firstname" type="text" name="firstname" placeholder="First Name" />
+                        </label>
+                        
+                        <label>
+                            <span>Last Name </span>
+                            <input id="lastname" type="text" name="lastname" placeholder="Last Name" />
+                        </label>
+                        
+                        <label>
+                            <span>Address </span>
+                            <input id="address" type="text" name="address" placeholder="Address" />
+                        </label>
+                        
+                        <label>
+                            <span>City </span>
+                            <input id="city" type="text" name="city" placeholder="City" />
+                        </label>
+                        
+                        <label>
+                            <span>Postal Code </span>
+                            <input id="postalcode" type="text" name="postalcode" placeholder="Postal Code" />
+                        </label>
 
+                        <label>
+                            <span>Email </span>
+                            <input id="email" type="email" name="email" placeholder="Valid Email Address" />
+                        </label>
+                        
+                        <label>
+                            <span>Phone </span>
+                            <input id="phonenumber" type="tel" name="phonenumber" placeholder="Phone Number" />
+                        </label>
+                        
+                         <label>
+                            <input type="button" class="button" value="Add" />
+                        </label>    
+                        
+                    </form>
+                </div>
+
+            </div>    
+            <div id="deviceready"> </div>
         </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
