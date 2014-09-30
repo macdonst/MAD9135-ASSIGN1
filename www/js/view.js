@@ -14,19 +14,17 @@ var view = {
     },
     drawContactList: function(contacts)
     {
-		//This is simple example code showing how to loop through the 
-		//contacts array and extract the displayName and id
-		
+		//Clear the div first 
+		this.contact_list_element.innerHTML = html;	
 		//Save this for future use
 		this.contacts = contacts;
 		//Build the html
-		var html = '<ul id="contacts_ul">';
+		var html = '';
 		for(var i = 0; i < contacts.length; i++)
 		{
 			var contact = this.contacts[i];
-			html += '<li id="' + contact.id + '">' + contact.displayName + '</li>';
+			html += '<div class="contact_box"  id="' + contact.id + '"><h2 class="name">' + contact.displayName + '</div>';
     	}
-		html += '</ul>';
 		//Save the html to the contact list element
 		this.contact_list_element.innerHTML = html;	
     },
@@ -34,29 +32,59 @@ var view = {
     {
     	this.contact_list_element.innerHTML = "";
     },
+    val: function(val)
+    {
+    	var ret = val ? 'value="' + val + '"' : '';
+     	return ret; 
+    },
     drawContactForm: function(contact)
     {
 		console.log("draw Contact form for: " + contact.name.formatted);
-		
-		var html = "<ul>" + 
-		"<li>Formatted: "  +   contact.name.formatted       + "</li>" +
-        "<li>Family Name: "  + contact.name.familyName      + "</li>" +
-        "<li>Given Name: "   + contact.name.givenName       + "</li>" +
-        "<li>Middle Name: "  + contact.name.middleName      + "</li>" +
-        "<li>Id: "           + contact.id 					+ "</li>" +
-        "<li>DisplayName: "  + contact.displayName 			+ "</li>" +
-        "<li>Address List<ul>";	
-        
-        for(var j = 0; j < contact.addresses.length; j++)
-        {
-        	html += "<li>Type: "	+ contact.addresses[j].type          	+ "<ul>" +
-            "<li>Street Address: " 		+ contact.addresses[j].streetAddress 	+ "</li>" +
-            "<li>Locality: "       		+ contact.addresses[j].locality      	+ "</li>" +
-            "<li>Region: "         		+ contact.addresses[j].region        	+ "</li>" +
-            "<li>Postal Code: "    		+ contact.addresses[j].postalCode    	+ "</li>" +
-            "<li>Country: "        		+ contact.addresses[j].country 			+ "</li></ul></li>";
-        }
-        html += "</ul>";
+		this.contact_form_element.innerHTML = "";
+	    var html = '<form action="" method="post" class="basic-grey">' +
+	        '<label>' +
+	            '<span>First Name </span>' +
+	            '<input id="firstname" type="text" name="firstname" placeholder="First Name" ' + this.val(contact.name.givenName) + '/>' +
+	        '</label>' +
+	        '<label>' +
+	            '<span>Last Name </span>' +
+	            '<input id="lastname" type="text" name="lastname" placeholder="Last Name"' + this.val(contact.name.familyName) + '/>' +
+	        '</label>' +
+	        '<label>' +
+	            '<span>Address </span>' +
+	            '<input id="address" type="text" name="address" placeholder="Address"';
+	             var val = contact.addresses.length > 0 ? contact.addresses[0].streetAddress : null;
+	             html += this.val(val) + ' />' +
+	        '</label>' +
+	        '<label>' +
+	            '<span>City </span>' +
+	            '<input id="city" type="text" name="city" placeholder="City"';
+	             val = contact.addresses.length > 0 ? contact.addresses[0].locality : null;
+	             html += this.val(val) + ' />' +
+	        '</label>' +
+	        '<label>' +
+	            '<span>Postal Code </span>' +
+	            '<input id="postalcode" type="text" name="postalcode" placeholder="Postal Code"';
+	            val = contact.addresses.length > 0 ? contact.addresses[0].postalCode : null;
+	            html += this.val(val) + ' />' +
+	        '</label>' +
+	        '<label>' +
+	            '<span>Email </span>' +
+	            '<input id="email" type="email" name="email" placeholder="Valid Email Address"';
+	            val = contact.emails.length > 0 ? contact.emails[0].value : null;
+	            html += this.val(val) + ' />' +
+	        '</label>' +
+	        '<label>' +
+	            '<span>Phone </span>' +
+	            '<input id="phonenumber" type="tel" name="phonenumber" placeholder="Phone Number"';
+	            val = contact.phoneNumbers.length > 0 ? contact.phoneNumbers[0].value : null;
+	            html += this.val(val) + ' />' +
+	        '</label>' +
+	         '<label>' +
+	            '<input type="button" class="button" value="Add" />' +
+	        '</label>' +    
+	    '</form>';
+	    console.log(html);
         this.contact_form_element.innerHTML = html;
     },
     closeContactForm: function()
