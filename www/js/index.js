@@ -1,6 +1,7 @@
 var DEBUG_FIX = false;
             
 var controller = {
+	editStatus:false,
     //Constructor
     init: function()
     {
@@ -12,6 +13,12 @@ var controller = {
         document.addEventListener('contactListReady', this.onContactListReady, false);
         document.addEventListener('offline', this.onOffline, false);
         document.addEventListener('online', this.onOnline, false);
+        document.getElementById('edit_form_button').addEventListener('click', this.onEditClick, false);
+    },
+    onEditClick: function()
+    {
+    	 controller.editStatus = !controller.editStatus;
+    	 view.setReadOnly(controller.editStatus);
     },
     //Going Offline
     onOffline: function()
@@ -34,7 +41,9 @@ var controller = {
     	function(ev)
     	{
     		//When the Contact tile is clicked get the contact and draw it
-    		view.drawContactForm(model.getContactById(ev.target.id));
+    		//view.drawContactForm(model.getContactById(ev.target.id));
+    		view.setReadOnly(true);
+    		view.updateFields(model.getContactById(ev.target.id));
     	});
     },
     onDeviceReady: function()
