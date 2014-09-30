@@ -89,7 +89,7 @@ var view = {
 		console.log("Make Input Elements");
 		
 		this.contact_form_firstname = this.makeInput("firstname", "text", "firstname", "First Name");
-		var label1 = this.makeLabel("TEST First Name ", this.contact_form_firstname);
+		var label1 = this.makeLabel("First Name ", this.contact_form_firstname);
 		form.appendChild(label1);
 		
 		this.contact_form_lastname = this.makeInput("lastname", "text", "lastname", "Last Name");
@@ -122,6 +122,7 @@ var view = {
     },
     setReadOnly: function(isReadOnly)
     {
+		console.log("Read Only Status: " + isReadOnly);
 		this.isReadOnly = isReadOnly;
 		this.contact_form_firstname.readOnly=isReadOnly;
 		this.contact_form_lastname.readOnly=isReadOnly;

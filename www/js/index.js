@@ -15,8 +15,10 @@ var controller = {
         document.addEventListener('online', this.onOnline, false);
         document.getElementById('edit_form_button').addEventListener('click', this.onEditClick, false);
     },
-    onEditClick: function()
+    onEditClick: function(ev)
     {
+    	 console.log("You Clicked?");
+    	 ev.preventDefault();
     	 controller.editStatus = !controller.editStatus;
     	 view.setReadOnly(controller.editStatus);
     },
