@@ -85,9 +85,9 @@ var saveContacts = function(jsonResponse) {
 	for (i = 0; i < jsonResponse.length; i++) {
 		var firstName = jsonResponse[i].firstname;
 		var lastName = jsonResponse[i].lastname;
-		var street = jsonResponse[i].street;
-		var city = jsonResponse[i].city;
-		var state = jsonResponse[i].state;
+		var userStreet = jsonResponse[i].street;
+		var userCity = jsonResponse[i].city;
+		var userState = jsonResponse[i].state;
 		var userPhone = jsonResponse[i].phone;
 		var userEmail = jsonResponse[i].email;
 	
@@ -99,12 +99,32 @@ var saveContacts = function(jsonResponse) {
 		name.familyName = lastName; 
 		contact.name = name;
 	
-		//var phone = new ContactField();
-		//phone.pref = "true";
-		//phone.type = "home";
-		//phone.value = userPhone;
-		//contact.phoneNumbers = phone;
-	
+		var phoneArray =[];
+		var phone = new ContactField();
+		phone.pref = "true";
+		phone.type = "home";
+		phone.value = userPhone;
+		phoneArray[0] = phone;
+		contact.phoneNumbers = phoneArray;
+		
+		var addressArray = [];
+		var address = new ContactAddress();
+		address.locality = userCity;
+		address.pref = "true";
+		address.region = userState;
+		address.streetAddress = userStreet;
+		address.type = "home";
+		addressArray[0] = address;
+		contact.addresses = addressArray;
+		
+		var emailArray = [];
+		var email = new ContactField();
+		email.pref = "true";
+		email.type = "home";
+		email.value = userEmail;
+		emailArray[0] = email;
+		contact.emails = emailArray;
+		
 		contact.save(onSuccess,onError);
 	}
 };
