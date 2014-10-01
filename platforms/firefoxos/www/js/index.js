@@ -73,6 +73,30 @@ getContacts = function(){
 	}
 };
 
+document.getElementById('contactList').addEventListener("click", function(e) {
+   document.getElementById('contacts').style.display="none";
+   document.getElementById('contactInfo').style.display="block";
+   document.getElementById('addContact').style.display="none";
+});
+
+document.getElementById('backBtn').addEventListener("click", function(e) {
+   document.getElementById('contacts').style.display="block";
+   document.getElementById('contactInfo').style.display="none";
+   document.getElementById('addContact').style.display="none";
+});
+
+document.getElementById('addBtn').addEventListener("click", function(e) {
+   document.getElementById('addContact').style.display="block";
+   document.getElementById('contacts').style.display="none";
+   document.getElementById('contactInfo').style.display="none";
+});
+
+document.getElementById('backBtn2').addEventListener("click", function(e) {
+   document.getElementById('contacts').style.display="block";
+   document.getElementById('contactInfo').style.display="none";
+   document.getElementById('addContact').style.display="none";
+});
+
 var saveContacts = function(jsonResponse) {
 	console.log(jsonResponse[0].firstname)
 	console.log(jsonResponse[0].lastname)
