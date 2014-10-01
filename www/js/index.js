@@ -50,21 +50,7 @@ var controller = {
     },
     onDeviceReady: function()
     {
-		//localStorage.setItem('heroImportDone',"true");
-		//localStorage.setItem('heroImportDone',"false");
-		
-		var heroImportDone = localStorage.getItem('heroImportDone');
-		console.log("heroImportDone: " + heroImportDone);
-		if("true" == heroImportDone)
-		{
-			console.log("Prepare Contact list");
-			model.prepareContactList("");
-		}
-		else
-		{
-      		console.log("Import Hockey Heroes");
-      		model.getHockeyHeroesJson();
-		}
+      	model.prepareContactList();
     }
 };
 
@@ -72,10 +58,13 @@ var controller = {
 function start_hockey_heroes_app()
 {
 	document.addEventListener('deviceready',function(){
-		model.init();
-		view.init("contact_list_", "contact_form");
-		controller.init();
-		controller.onDeviceReady();
+		//document.getElementById('deviceready').addEventListener('click', function()
+		//{
+			model.init();
+			view.init("contact_list_", "contact_form");
+			controller.init();
+			controller.onDeviceReady();
+		//},false);
 	}, false);
 }
 start_hockey_heroes_app();

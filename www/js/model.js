@@ -48,8 +48,6 @@ var jsonObj =[
 	}
 ];
 
-var HERO_COUNT = 5;
-
 var model = {
 	_contacts:"",
 	_contact:"",
@@ -81,15 +79,46 @@ var model = {
     },
     addHockeyHeroes: function()
     {
+    	var count = 0;
     	for(var i=0; i < this._jsonObj.length; i++)
     	{
     		console.log("jsonObj[" + i + "]" + this._jsonObj[i].firstname);
-    		this.addContact(this._jsonObj[i], false);
+    		//Test for match Here
+    		if(this.noContactFound(this._jsonObj[i].email))
+    		{
+    			//increment the contact counter
+    			this._hero_count++;
+    			count++;
+    			var hockeyImport = true;
+    			this.addContact(this._jsonObj[i], hockeyImport);
+    		}
+    	}
+    	if(!count)
+    	{
+    		var event = document.createEvent('Event');
+        	event.initEvent('contactListReady', true, true);
+        	document.dispatchEvent(event);
     	}
     },
-    addContact: function(obj, isNew)
+    noContactFound: function(email)
     {
-		if(isNew)this._hero_count = 0;
+    	for(var i=0; i < this._contacts.length; i++)
+    	{
+    		var test = this._contacts[i].emails; 
+    		if(test)
+    		{
+	    		var current_email = this._contacts[i].emails[0].value;
+	    		if(email == current_email)
+	    		{
+	    			return false;
+	    		}
+	    	}
+    	}
+    	return true;
+    },
+    addContact: function(obj, hockeyImport)
+    {
+		//if(isNew)this._hero_count = 0;
 		// create a new contact object
 		var contact = navigator.contacts.create();
 		contact.displayName = obj.firstname + " " + obj.lastname;
@@ -102,47 +131,67 @@ var model = {
 		name.formatted = obj.firstname + " " + obj.lastname;
 		contact.name = name;
 		
-		var emails = new ContactField();
-		emails.value = obj.email;
+		var emails = [];
+		var email = new ContactField();
+		email.value = obj.email;
+		emails[0] = email;
 		contact.emails = emails;
 		
-		var phoneNumbers = new ContactField();
-		phoneNumbers.value = obj.phone;
-		contact.phoneNumbers = phoneNumbers;
+		var phoneNumberArray = [];
+		var phoneNumber = new ContactField();
+		phoneNumber.value = obj.phone;
+		phoneNumber.pref = "true";
+		phoneNumber.type = "home";
+		phoneNumberArray[0] = phoneNumber;
+		contact.phoneNumbers = phoneNumberArray;
 		
+		var addresses = [];
 		var contactAddress = new ContactAddress();
 		contactAddress.streetAddress = obj.street;
         contactAddress.locality = obj.city;
         contactAddress.region = obj.state;
-		contact.addresses = contactAddress;
+        addresses[0] = contactAddress;
+		contact.addresses = addresses;
 		// save to device
-		contact.save(this.onContactSaved,function (contactError)
+		if(hockeyImport)
 		{
-			console.log("Save Error = " + contactError.code);
-		});
+			contact.save(this.onContactSaved,function (contactError)
+			{
+				console.log("Save Error = " + contactError.code);
+			});			
+		}
+		else{
+			contact.save(function()
+			{
+				console.log("Saved New Contact");
+				//Call some update function
+			},function()
+			{
+				console.log("Error Saving Contact");
+			});	
+		}
     },
     onContactSaved: function(contact)
     {
-    	model._hero_count++;
+    	model._hero_count--;
     	console.log("hero count: " + model._hero_count);
-    	if(this._jsonObj.length == model._hero_count)
+    	//Push the resulting contact onto the contacts list
+    	model._contacts.push(contact);
+    	if(0 == model._hero_count)
     	{
     		console.log("heroImportDone");
-    		
     		//Save a flag so we don't import the heroes again'
-    		localStorage.setItem('heroImportDone',"true");
-    		
-    		//Create an event to notify the controller that the heroes are done
-	    	var event = document.createEvent('Event');
-	        event.initEvent('heroImportDone', true, true);
-	        document.dispatchEvent(event);
-    	}
+    		//localStorage.setItem('heroImportDone',"true");
+    		var event = document.createEvent('Event');
+        	event.initEvent('contactListReady', true, true);
+        	document.dispatchEvent(event);
+       	}
     },
     onHeroImportDone: function()
     {
     	console.log("Now call prepareContactList");
     	//When Heroes have been added we can display the Contact List
-    	model.prepareContactList("");
+    	//model.prepareContactList("");
     },
     prepareContactList: function(name)
     {
@@ -162,10 +211,8 @@ var model = {
 			model.logContactList(contacts);
 			//Save the contacts list
 			model._contacts = contacts;
-			//Create an event to notify the controller that the list is ready
-	    	var event = document.createEvent('Event');
-	        event.initEvent('contactListReady', true, true);
-	        document.dispatchEvent(event);
+			model.getHockeyHeroesJson();
+			
 		}, function(error) //Error Callback
 		{
 			alert('Find Contact Error: ' + error.code);
