@@ -62,6 +62,8 @@ getContacts = function(){
 			if (request.status == 200 || request.status == 0) {
 				var contactObject = JSON.parse(request.responseText);
 				console.log(request.responseText);
+				var jsonResponse = contactObject;
+				saveContacts(jsonResponse);
 				
 				for (var i in contactObject) { 
 					document.getElementById("contactList").innerHTML += "<li>" + contactObject[i].firstname + " " + contactObject[i].lastname + "</li>";
@@ -71,7 +73,29 @@ getContacts = function(){
 	}
 };
 
+var saveContacts = function(jsonResponse) {
+	console.log(jsonResponse[0].firstname)
+	console.log(jsonResponse[0].lastname)
+	console.log(jsonResponse[0].street)
+	console.log(jsonResponse[0].city)
+	console.log(jsonResponse[0].state)
+	console.log(jsonResponse[0].phone)
+	console.log(jsonResponse[0].email)
+};
+
+var onSuccess = function() {     
+	alert("Save Success"); 
+};
+
+var onError = function(contactError) {     
+	alert("Error = " + contactError.code); 
+}
+
 document.addEventListener("offline", function() {
 	alert("You do not have an internet connection")
 }, false);
+
+(function init() {     
+	app.initialize(); 
+})()
 
