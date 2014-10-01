@@ -81,6 +81,30 @@ var saveContacts = function(jsonResponse) {
 	console.log(jsonResponse[0].state)
 	console.log(jsonResponse[0].phone)
 	console.log(jsonResponse[0].email)
+	
+	var firstName = jsonResponse[0].firstname;
+	var lastName = jsonResponse[0].lastname;
+	var street = jsonResponse[0].street;
+	var city = jsonResponse[0].city;
+	var state = jsonResponse[0].state;
+	var userPhone = jsonResponse[0].phone;
+	var userEmail = jsonResponse[0].email;
+	
+	var contact = navigator.contacts.create(); 
+	contact.displayName = (firstName + " " + lastName);
+	
+	var name = new ContactName(); 
+	name.givenName = firstName; 
+	name.familyName = lastName; 
+	contact.name = name;
+	
+	var phone = new ContactField();
+	phone.pref = "true";
+	phone.type = "home";
+	phone.value = userPhone;
+	contact.phoneNumbers = phone;
+	
+	contact.save(onSuccess,onError);
 };
 
 var onSuccess = function() {     
