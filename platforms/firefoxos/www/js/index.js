@@ -56,7 +56,7 @@ getContacts = function(){
 	var request = new XMLHttpRequest();
 	request.open("GET", "https://dl.dropboxusercontent.com/u/887989/MAD9135/contacts.json", "async");
 	request.send();
-
+	
 	request.onreadystatechange = function() {
 		if (request.readyState == 4) {
 			if (request.status == 200 || request.status == 0) {
@@ -72,30 +72,6 @@ getContacts = function(){
 		}
 	}
 };
-
-document.getElementById('contactList').addEventListener("click", function(e) {
-   document.getElementById('contacts').style.display="none";
-   document.getElementById('contactInfo').style.display="block";
-   document.getElementById('addContact').style.display="none";
-});
-
-document.getElementById('backBtn').addEventListener("click", function(e) {
-   document.getElementById('contacts').style.display="block";
-   document.getElementById('contactInfo').style.display="none";
-   document.getElementById('addContact').style.display="none";
-});
-
-document.getElementById('addBtn').addEventListener("click", function(e) {
-   document.getElementById('addContact').style.display="block";
-   document.getElementById('contacts').style.display="none";
-   document.getElementById('contactInfo').style.display="none";
-});
-
-document.getElementById('backBtn2').addEventListener("click", function(e) {
-   document.getElementById('contacts').style.display="block";
-   document.getElementById('contactInfo').style.display="none";
-   document.getElementById('addContact').style.display="none";
-});
 
 var saveContacts = function(jsonResponse) {
 	console.log(jsonResponse[0].firstname)
@@ -151,14 +127,113 @@ var saveContacts = function(jsonResponse) {
 		
 		contact.save(onSuccess,onError);
 	}
+};//ADDS CLICK LISTENERS TO THE CONTACTS AND BUTTONS (EXCEPT FOR THE SAVE NEW CONTACT BUTTON)
+	//THE CLICK LISTENER FOR THE CONTACTS IS JUST THE UL AS A WHOLE RIGHT NOW... WILL NEED TO BE CHANGED TO EACH INDIVIDUAL CONTACT
+	
+document.getElementById('contactList').addEventListener("click", function(e) {
+   document.getElementById('contacts').style.display="none";
+   document.getElementById('contactInfo').style.display="block";
+   document.getElementById('addContact').style.display="none";
+});
+
+document.getElementById('backBtn1').addEventListener("click", function(e) {
+   document.getElementById('contacts').style.display="block";
+   document.getElementById('contactInfo').style.display="none";
+   document.getElementById('addContact').style.display="none";
+});
+
+document.getElementById('backBtn2').addEventListener("click", function(e) {
+   document.getElementById('contacts').style.display="block";
+   document.getElementById('contactInfo').style.display="none";
+   document.getElementById('addContact').style.display="none";
+});
+
+document.getElementById('addBtn').addEventListener("click", function(e) {
+   document.getElementById('addContact').style.display="block";
+   document.getElementById('contacts').style.display="none";
+   document.getElementById('contactInfo').style.display="none";
+   getGPSLocation();
+});
+
+document.getElementById('submit').addEventListener("click", function(e) {
+	var firstName = document.getElementById('firstName').value;
+	var lastName = document.getElementById('lastName').value;
+	var userStreet = document.getElementById('street').value;
+	var userCity = document.getElementById('city').value;
+	var userState = document.getElementById('postalCode').value; //THIS IS THE STATE!!!
+	var userPhone = document.getElementById('phone').value;
+	var userEmail = document.getElementById('email').value;
+	
+	var contact = navigator.contacts.create(); 
+		contact.displayName = (firstName + " " + lastName);
+	
+		var name = new ContactName(); 
+		name.givenName = firstName; 
+		name.familyName = lastName; 
+		contact.name = name;
+	
+		var phoneArray =[];
+		var phone = new ContactField();
+		phone.pref = "true";
+		phone.type = "home";
+		phone.value = userPhone;
+		phoneArray[0] = phone;
+		contact.phoneNumbers = phoneArray;
+		
+		var addressArray = [];
+		var address = new ContactAddress();
+		address.locality = userCity;
+		address.pref = "true";
+		address.region = userState;
+		address.streetAddress = userStreet;
+		address.type = "home";
+		addressArray[0] = address;
+		contact.addresses = addressArray;
+		
+		var emailArray = [];
+		var email = new ContactField();
+		email.pref = "true";
+		email.type = "home";
+		email.value = userEmail;
+		emailArray[0] = email;
+		contact.emails = emailArray;
+		
+		contact.save(onSuccess,onError);
+		
+		alert("Contact Added!");
+});
+
+//FUNCTION THAT GETS THE USERS CURRENT POSITION
+
+getGPSLocation = function(){
+	if(navigator.geolocation){
+		navigator.geolocation.getCurrentPosition(successCallback, errorCallback,
+		{
+		enableHighAccuracy: true,
+		timeout: 5000
+		});
+	}else{
+		
+	}
 };
 
+//FUNCTION THAT HANDLES WHEN THE GET POSITION FUNCTION RETURNS SUCCESS
+
+function successCallback(position){
+	alert("We found your location");
+}
+
 var onSuccess = function() {     
-	alert("Save Success"); 
 };
 
 var onError = function(contactError) {     
 	alert("Error = " + contactError.code); 
+}
+
+//FUNCTION THAT HANDLES WHEN THE GET POSITION FUNCTION RETURNS AN ERROR
+
+function errorCallback(error){
+	alert("We can't find your current location. You will need to enter it manually.");
 }
 
 document.addEventListener("offline", function() {

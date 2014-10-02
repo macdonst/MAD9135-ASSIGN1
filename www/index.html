@@ -30,17 +30,36 @@
     <body>
         <div id="contacts">
             <h1 id="contactHeader">Contacts</h1>
-            <button id="addBtn">Add Contact</button>
+            <div id="addBtnDiv">
+            	<button id="addBtn">Add Contact</button>
+            </div>
             <ul id="contactList">
             </ul>
         </div>
         <div id="contactInfo" style="display:none">
-            <h1 id="contactInfoHeader">Contact Name</h1>
-            <button id="backBtn">Back</button>
+            <div id="backBtn1Div">
+            	<button id="backBtn1">Back</button>
+            </div>
         </div>
         <div id="addContact" style="display:none">
             <h1 id="addContactHeader">Add Contact</h1>
-            <button id="backBtn2">Back</button>
+            <div id="backBtn2Div">
+            	<button id="backBtn2">Back</button>
+            </div>
+            <form id="addContactForm">
+                <fieldset>
+                    <input name="firstName" id="firstName" placeholder="First Name" type="text"><br><br>
+                    <input name="lastName" id="lastName" placeholder="Last Name" type="text"><br><br>
+                    <input name="street" id="street" placeholder="Street" type="text"><br><br>
+                    <input name="city" id="city" placeholder="City" type="text"><br><br>
+                    <input name="postalCode" id="postalCode" placeholder="State" type="text"><br><br>
+                    <input name="phone" id="phone" placeholder="Phone #" type="number"><br><br>
+                    <input name="email" id="email" placeholder="Email" type="text"><br><br>
+                </fieldset><br><br>
+                <div id="submitDiv">
+                	<input type="button" value="Save" name="submit" id="submit" on><br><br>
+                </div>
+            </form>            
         </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
