@@ -96,15 +96,15 @@ function start_hockey_heroes_app()
 {
 	document.addEventListener('deviceready',function(){
 		//Uncomment this code to debug start up functions
-		document.getElementById('deviceready').addEventListener('click', function()
-		{
+		//document.getElementById('deviceready').addEventListener('click', function()
+		//{
 			model.init();
 			view.init("page1", "contact_list_", "page2", "contact_form");
 			view.hideContactForm();
 			
 			controller.init();
 			controller.onDeviceReady();
-		},false);
+		//},false);
 	}, false);
 }
 start_hockey_heroes_app();

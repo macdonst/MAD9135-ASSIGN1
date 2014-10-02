@@ -26,29 +26,29 @@ var model = {
 
      getHockeyHeroesJson: function()
     {
-        console.log("Ian: AJAX CALL");
-        var request = new XMLHttpRequest();
+       
+            var request = new XMLHttpRequest();
 
 
-        // add in the URL later
-        request.open("GET", "https://dl.dropboxusercontent.com/u/887989/MAD9135/contacts.json", true);
-            request.onreadystatechange = function()
-            {
-                if(request.readyState === 4)
+            // add in the URL later
+            request.open("GET", "https://dl.dropboxusercontent.com/u/887989/MAD9135/contacts.json", true);
+                request.onreadystatechange = function()
                 {
-                    if(request.status=== 200 || request.status===0)
+                    if(request.readyState === 4)
                     {
-                    	console.log(request.responseText);
+                        if(request.status=== 200 || request.status===0)
+                        {
+                            console.log(request.responseText);
 
-                        model._jsonObj = JSON.parse(request.responseText);
-			            model.hockeyHeroesJsonDone();
+                            model._jsonObj = JSON.parse(request.responseText);
+                            model.hockeyHeroesJsonDone();
+                        }
                     }
-                }
 
-            };
+                };
 
-            request.send();
-            console.log("IAN HERE");
+                request.send();
+        
 
     },
     hockeyHeroesJsonDone: function()
@@ -230,7 +230,14 @@ var model = {
 			model.logContactList(contacts);
 			//Save the contacts list
 			model._contacts = contacts;
-			model.getHockeyHeroesJson();
+            
+            //Check to see if conect to the internet
+            if(model.isOnline == true){
+                model.getHockeyHeroesJson();
+            }else{
+                alert("Please Connect to the Internet");
+            }
+          
 			
 		}, function(error) //Error Callback
 		{
