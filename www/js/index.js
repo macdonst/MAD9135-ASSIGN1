@@ -16,15 +16,29 @@ var controller = {
         document.getElementById('ad_contact_button').addEventListener('click', this.onAddClick, false);
         document.getElementById('back_button').addEventListener('click', this.onCloseClick, false);
         document.getElementById('save_contact').addEventListener('click', this.onSaveClick, false);
+        document.getElementById('simple_list_button').addEventListener('click', this.onSimpleListClick, false);
+        document.getElementById('icon_list_button').addEventListener('click', this.onIconListClick, false);
+    },
+    onSimpleListClick: function()
+    {
+    	//ev.preventDefault();
+    	var contacts = model.getContactList();
+    	view.drawSimpleList(contacts);
+    },
+    onIconListClick: function()
+    {
+    	//ev.preventDefault();
+    	var contacts = model.getContactList();
+    	view.drawContactList(contacts);
     },
     onEditClick: function(ev)
     {
-    	 ev.preventDefault();
+    	 //ev.preventDefault();
     	 view.setReadOnly(false);
     },
     onAddClick: function(ev)
     {
-    	ev.preventDefault();
+    	//ev.preventDefault();
     	view.updateFields(model.getEmptyContact());
     	view.setReadOnly(false);
       	view.hideContactList();
@@ -59,6 +73,7 @@ var controller = {
     	document.getElementById('contact_list_').addEventListener('click',
     	function(ev)
     	{
+    		ev.preventDefault();
     		view.setReadOnly(true);
     		view.updateFields(model.getContactById(ev.target.id));
 	      	view.hideContactList();

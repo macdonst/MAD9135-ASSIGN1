@@ -64,6 +64,17 @@ body{
     margin-bottom:2%;
 }
 
+.simple_box{
+	width:90%;
+	height:1.5em;
+	padding:2px;
+	margin-left:0.5%;
+    margin-right:0.5%;
+    margin-bottom:0.5%;
+    background:color white;
+	border:2px solid black;
+	display:block;
+}
 
 .contact_box{
     width:32.333333%;

@@ -53,7 +53,21 @@ var view = {
 		for(var i = 0; i < contacts.length; i++)
 		{
 			var contact = this.contacts[i];
-			html += '<div class="contact_box"  id="' + contact.id + '"><h2 class="name">' + contact.displayName + '</div>';
+			html += '<div class="contact_box"  id="' + contact.id + '"><h2 class="name">' + contact.displayName + '</h2></div>';
+    	}
+		//Save the html to the contact list element
+		this.contact_list_element.innerHTML = html;	
+    },
+    drawSimpleList: function(contacts)
+    {
+		//Clear the div first 
+		this.contact_list_element.innerHTML = "";	
+		//Build the html
+		var html = '';
+		for(var i = 0; i < contacts.length; i++)
+		{
+			var contact = this.contacts[i];
+			html += '<div class="simple_box"  id="' + contact.id + '">' + contact.displayName + '</div>';
     	}
 		//Save the html to the contact list element
 		this.contact_list_element.innerHTML = html;	
