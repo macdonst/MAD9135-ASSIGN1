@@ -49,8 +49,13 @@ var app = {
 };
 
 document.addEventListener("online", function() {
-	getContacts();
-	getDeviceContacts();
+	if(localStorage.info) {
+		alert("You already have our contacts");
+		getDeviceContacts();
+	} else {
+		alert("Downloading contacts to device");
+		getContacts();
+	}
 }, false);
 
 document.addEventListener("offline", function() {
@@ -62,7 +67,7 @@ function getDeviceContacts() {
 	var onSuccess = function(contacts) {     
 		for (i = 0; i < contacts.length; i++) {
 			console.log(contacts[i].displayName); 
-			document.getElementById("contactList").innerHTML += '<li>' + contacts[i].displayName + '</li>';
+			document.getElementById("contactList").innerHTML += '<li id="' + contacts[i].id + '">' + contacts[i].displayName + '</li>';
 				
 		}
 	};
@@ -88,6 +93,7 @@ getContacts = function(){
 				var contactObject = JSON.parse(request.responseText);
 				console.log(request.responseText);
 				var jsonResponse = contactObject;
+				localStorage.setItem("info", "1");
 				saveContacts(jsonResponse);
 			}       
 		}
@@ -139,13 +145,17 @@ var saveContacts = function(jsonResponse) {
 		emailArray[0] = email;
 		contact.emails = emailArray;
 		
-		//contact.save(onSuccess,onError);
+		contact.save(onSuccess,onError);
 	}
+	
+	alert("Contacts BOOM!");
+	getDeviceContacts();
 };
 	//ADDS CLICK LISTENERS TO THE CONTACTS AND BUTTONS (EXCEPT FOR THE SAVE NEW CONTACT BUTTON)
 	//THE CLICK LISTENER FOR THE CONTACTS IS JUST THE UL AS A WHOLE RIGHT NOW... WILL NEED TO BE CHANGED TO EACH INDIVIDUAL CONTACT
 	
 document.getElementById('contactList').addEventListener("click", function(e) {
+	console.log(e.target.id);
 	document.getElementById('contacts').style.display="none";
     document.getElementById('contactInfo').style.display="block";
     document.getElementById('addContact').style.display="none";
@@ -181,6 +191,7 @@ document.getElementById('submit').addEventListener("click", function(e) {
 	
 	var contact = navigator.contacts.create(); 
 		contact.displayName = (firstName + " " + lastName);
+		document.getElementById("contactList").innerHTML += '<li>' + firstName + " " + lastName + '</li>';
 	
 		var name = new ContactName(); 
 		name.givenName = firstName; 
