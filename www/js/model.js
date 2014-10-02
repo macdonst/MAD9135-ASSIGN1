@@ -23,6 +23,9 @@ var model = {
 		}
 		console.log('\n\nFound ' + contacts.length + ' contacts.\n' + strNames);
     },
+    stupidFunction: function(){
+        console.log("mgfskonlasjbaglkwr");
+    },
 
      getHockeyHeroesJson: function()
     {
@@ -267,19 +270,26 @@ var model = {
     },
     getContactById: function(id)
     {
+        console.log("********************");
 		for(var i=0; i < this._contacts.length; i++)
 		{
 			var contact = this._contacts[i];
 			if(contact.id == id)
 			{
+                
 				this._contact = this.fixNullArrayFields(contact);
-				continue;
+				this._contact = contact;
+                contactID = contact.id;
+                 console.log("set contact ID: "+ contactID);
+                //console.log("Get Contact By ID: "+ this._contact.name.givenName);
+                continue;
 			}	
 		}
 		return this._contact;
     },
     getContact: function()
     {
+        console.log("This contact: " + this._contact);
     	return this._contact;
     },
     setOnlineStatus: function(isOnline)
