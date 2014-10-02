@@ -1,0 +1,25 @@
+{
+    "launch_path": "/index.html",
+    "installs_allowed_from": [
+        "*"
+    ],
+    "version": "0.0.1",
+    "name": "Cloud_Contacts",
+    "pkgName": "com.algonquin.mad90135.abhy",
+    "description": "A sample Apache Cordova application that responds to the deviceready event.",
+    "developer": {
+        "name": "Apache Cordova Team",
+        "url": "http://cordova.io"
+    },
+    "permissions": {
+        "geolocation": {
+            "description": "Required for accessing user location."
+        },
+        "contacts": {
+            "description": "Required for accessing address book.",
+            "access": "readwrite"
+        }
+    },
+    "type": "privileged",
+    "icons": {}
+}
