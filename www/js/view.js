@@ -192,6 +192,15 @@ var view = {
 			this.contact_form_phonenumber.value = contact.phoneNumbers[0].value;
 		}
     },
+    changeHeader: function(text){
+        document.getElementById('addContactHeader').innerHTML = text;
+    },
+    hideEditButton: function(){
+        document.getElementById('edit_form_button').style.visibility = "hidden";
+    },
+    showEditButton: function(){
+        document.getElementById('edit_form_button').style.visibility = "visible";
+    },
     closeContactForm: function()
     {
     	this.contact_form_element.innerHTML = "";

@@ -1,3 +1,4 @@
+
 *{
     margin:0px;
     padding:0px;
@@ -5,6 +6,7 @@
 	-webkit-tap-highlight-color: transparent;
 
 }
+
 
 
 
@@ -22,7 +24,7 @@ body{
 }
 
 /******************* Main Page Style ************************/
-#header{
+.header{
     width:100%;
     position: fixed;
     z-index:1000;
@@ -31,9 +33,9 @@ body{
 
 }
 
-#header h1{
+.header h1{
     width:77%;
-    font-family: 'Racing Sans One', cursive;
+    font-family: Cambria, "Hoefler Text", "Liberation Serif", Times, "Times New Roman", serif;
     color:#fff;
     background: #962D3E;
     font-size:1.5em;
@@ -43,7 +45,7 @@ body{
     margin-left:10px;
 }
 
-#header .header_btn{
+.header .header_btn{
     
     padding-top:10px;
     width:25px;
@@ -51,7 +53,7 @@ body{
 }
 
 #contact_list_{
-    padding-top:47px;
+    padding-top:46px;
     padding-left:0.5%;
     padding-right:0.5%;
     margin-bottom:2%;
@@ -169,7 +171,7 @@ body{
 }
 
 
-.basic-grey .button {
+.button {
     background: #343642;
     border: none;
     padding: 10px 25px 10px 25px;
@@ -178,5 +180,14 @@ body{
     border-radius: 3px;
     text-shadow: 1px 1px 1px #9E3F3F;
     font-family: 'Roboto Condensed', sans-serif;
+    width:30%;
+    margin-left:13.3333333%;
+
+
+}
+
+.basic-grey .button {
     margin-left:66.5%;
 }
+
+
