@@ -7,3 +7,4 @@ Group Members
 =============
 
 Thomas Wiegand - wieg0002
+Richard Jackson - jack0179
