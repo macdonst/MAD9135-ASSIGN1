@@ -14,7 +14,7 @@ var controller = {
         document.addEventListener('online', this.onOnline, false);
         document.getElementById('edit_form_button').addEventListener('click', this.onEditClick, false);
         document.getElementById('ad_contact_button').addEventListener('click', this.onAddClick, false);
-        document.getElementById('close_contact').addEventListener('click', this.onCloseClick, false);
+        document.getElementById('back_button').addEventListener('click', this.onCloseClick, false);
         document.getElementById('save_contact').addEventListener('click', this.onSaveClick, false);
     },
     onEditClick: function(ev)
