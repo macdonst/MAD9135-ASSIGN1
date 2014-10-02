@@ -116,13 +116,50 @@ var model = {
     	}
     	return true;
     },
+    getEmptyContact:function()
+    {
+		var contact = navigator.contacts.create();
+		contact.displayName = "";
+		contact.nickname = "";            // specify both to support all devices
+		
+		// populate some EMPTY fields
+		var name = new ContactName();
+		name.givenName = "";
+		name.familyName = "";
+		name.formatted = "";
+		contact.name = name;
+		
+		var emails = [];
+		var email = new ContactField();
+		email.value = "";
+		emails[0] = email;
+		contact.emails = emails;
+		
+		var phoneNumberArray = [];
+		var phoneNumber = new ContactField();
+		phoneNumber.value = "";
+		phoneNumber.pref = "";
+		phoneNumber.type = "";
+		phoneNumberArray[0] = phoneNumber;
+		contact.phoneNumbers = phoneNumberArray;
+		
+		var addresses = [];
+		var contactAddress = new ContactAddress();
+		contactAddress.streetAddress = "";
+        contactAddress.locality = "";
+        contactAddress.region = "";
+        addresses[0] = contactAddress;
+		contact.addresses = addresses;
+		
+		return contact;
+    },
     addContact: function(obj, hockeyImport)
     {
 		//if(isNew)this._hero_count = 0;
 		// create a new contact object
 		var contact = navigator.contacts.create();
 		contact.displayName = obj.firstname + " " + obj.lastname;
-		contact.nickname = obj.firstname + " " + obj.lastname;;            // specify both to support all devices
+		contact.nickname = obj.firstname + " " + obj.lastname;            // specify both to support all devices
 		
 		// populate some fields
 		var name = new ContactName();
@@ -163,7 +200,7 @@ var model = {
 		else{
 			contact.save(function()
 			{
-				console.log("Saved New Contact");
+				//console.log("Saved New Contact");
 				//Call some update function
 			},function()
 			{
@@ -174,12 +211,12 @@ var model = {
     onContactSaved: function(contact)
     {
     	model._hero_count--;
-    	console.log("hero count: " + model._hero_count);
+    	//console.log("hero count: " + model._hero_count);
     	//Push the resulting contact onto the contacts list
     	model._contacts.push(contact);
     	if(0 == model._hero_count)
     	{
-    		console.log("heroImportDone");
+    		//console.log("heroImportDone");
     		//Save a flag so we don't import the heroes again'
     		//localStorage.setItem('heroImportDone',"true");
     		var event = document.createEvent('Event');
@@ -189,13 +226,13 @@ var model = {
     },
     onHeroImportDone: function()
     {
-    	console.log("Now call prepareContactList");
+    	//console.log("Now call prepareContactList");
     	//When Heroes have been added we can display the Contact List
     	//model.prepareContactList("");
     },
     prepareContactList: function(name)
     {
-	    console.log("Get Name And Address for: " + name);
+	    //console.log("Get Name And Address for: " + name);
 		var options      = new ContactFindOptions();
 		options.filter   = name;
 		options.multiple = true;
@@ -223,20 +260,22 @@ var model = {
     {
     	return this._contacts;
     },
+    //Test if any null arrays and set them to empty array
+    fixNullArrayFields: function(contact)
+    {
+    	contact.emails = contact.emails ? contact.emails : contact.emails = []; 
+    	contact.addresses = contact.addresses ? contact.addresses : contact.addresses = []; 
+    	contact.phoneNumbers = contact.phoneNumbers ? contact.phoneNumbers : contact.phoneNumbers = [];
+    	return contact; 
+    },
     getContactById: function(id)
     {
-    	console.log("Get Contact Info for: " + id);
-    	
-    	//Debug code to test save contact
-    	//var obj = jsonObj[0];
-    	//this.addContact(obj, false);
-    	
 		for(var i=0; i < this._contacts.length; i++)
 		{
 			var contact = this._contacts[i];
 			if(contact.id == id)
 			{
-				this._contact = contact;
+				this._contact = this.fixNullArrayFields(contact);
 				continue;
 			}	
 		}

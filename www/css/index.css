@@ -12,6 +12,14 @@ body{
     background: #F2EBC7;
 }
 
+/******************* Show or Hide Stuff ************************/
+
+.show{
+	display:block;
+}
+.hide{
+	display:none;
+}
 
 /******************* Main Page Style ************************/
 #header{

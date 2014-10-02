@@ -1,7 +1,6 @@
 var DEBUG_FIX = false;
             
 var controller = {
-	editStatus:false,
     //Constructor
     init: function()
     {
@@ -14,13 +13,33 @@ var controller = {
         document.addEventListener('offline', this.onOffline, false);
         document.addEventListener('online', this.onOnline, false);
         document.getElementById('edit_form_button').addEventListener('click', this.onEditClick, false);
+        document.getElementById('ad_contact_button').addEventListener('click', this.onAddClick, false);
+        document.getElementById('close_contact').addEventListener('click', this.onCloseClick, false);
+        document.getElementById('save_contact').addEventListener('click', this.onSaveClick, false);
     },
     onEditClick: function(ev)
     {
-    	 console.log("You Clicked?");
     	 ev.preventDefault();
-    	 controller.editStatus = !controller.editStatus;
-    	 view.setReadOnly(controller.editStatus);
+    	 view.setReadOnly(false);
+    },
+    onAddClick: function(ev)
+    {
+    	ev.preventDefault();
+    	view.updateFields(model.getEmptyContact());
+    	view.setReadOnly(false);
+      	view.hideContactList();
+    	view.showContactForm();
+    },
+    onCloseClick: function(ev)
+    {
+		ev.preventDefault();
+		view.showContactList();
+    	view.hideContactForm();
+    },
+    onSaveClick: function(ev)
+    {
+    	ev.preventDefault();
+    	view.setReadOnly(true);
     },
     //Going Offline
     onOffline: function()
@@ -35,17 +54,15 @@ var controller = {
     //The contact list is ready
     onContactListReady: function()
     {
-    	console.log("The contact list is ready");
-    	//Hand the array off to the view to draw it    	
     	view.drawContactList(model.getContactList());
     	//Add event listener for list item clicks
     	document.getElementById('contact_list_').addEventListener('click',
     	function(ev)
     	{
-    		//When the Contact tile is clicked get the contact and draw it
-    		//view.drawContactForm(model.getContactById(ev.target.id));
     		view.setReadOnly(true);
     		view.updateFields(model.getContactById(ev.target.id));
+	      	view.hideContactList();
+	    	view.showContactForm();
     	});
     },
     onDeviceReady: function()
@@ -58,10 +75,13 @@ var controller = {
 function start_hockey_heroes_app()
 {
 	document.addEventListener('deviceready',function(){
+		//Uncomment this code to debug start up functions
 		//document.getElementById('deviceready').addEventListener('click', function()
 		//{
 			model.init();
-			view.init("contact_list_", "contact_form");
+			view.init("page1", "contact_list_", "page2", "contact_form");
+			view.hideContactForm();
+			
 			controller.init();
 			controller.onDeviceReady();
 		//},false);

@@ -12,15 +12,9 @@
     </head>
     <body>
         <div class="app">
-            <!--
-            <h5>Enter Name to Search for.</h5>
-        	<input type="text" id="contact_name" value="Thomas">
-			<button id="search_button">Search</button>
-			-->
             <div data-role="page" class="active"  id="page1">
                 
-                <div id="header1"><h1>Contact Manager</h1><a href=""><img src="img/add_btn.png" class="header_btn"/></a></div>
-
+                <div id="header1"><h1>Contact Manager</h1><a id="ad_contact_button" href=""><img src="img/add_btn.png" class="header_btn"/></a></div>
                 <div id="contact_list_">
                     <div class="contact_box"><h2 class="name">Richard Jackson</h2></div>
                     <div class="contact_box"><h2 class="name">Warren Butland</h2></div>
@@ -41,6 +35,8 @@
             <div data-role="page" id="page2">
                 
                 <div id="header2"><h1>Add Contact</h1><a id="edit_form_button" href=""><img src="img/back_btn.png" class="header_btn"/></a></div>
+				<button id="close_contact">Close</button>
+				<button id="save_contact">Save</button>
                 
                 <div id="contact_form">
                     <form action="" method="post" class="basic-grey">
@@ -65,11 +61,13 @@
                             <input id="city" type="text" name="city" placeholder="City" />
                         </label>
                         
+                        <!-- Postal code is not available in hockey heroes json
                         <label>
                             <span>Postal Code </span>
                             <input id="postalcode" type="text" name="postalcode" placeholder="Postal Code" />
                         </label>
-
+						-->
+						
                         <label>
                             <span>Email </span>
                             <input id="email" type="email" name="email" placeholder="Valid Email Address" />
@@ -87,14 +85,18 @@
                     </form>
                 </div>
 
-            </div>    
-            <div id="deviceready">DEBUG BUTTON</div>
+            </div>
+            
+            <!-- Uncomment this code to debug startup functions    
+            <div id="deviceready">DEBUG BUTTON</div>-->
+            
         </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/model.js"></script>
         <script type="text/javascript" src="js/view.js"></script>
         <script type="text/javascript" src="js/sim.js"></script>
+        
         <!--Note inline javascript was removed from here due to Firefox OS security constrictions
         	related to the Contacts plugin-->
         	
