@@ -61,8 +61,9 @@ document.addEventListener("offline", function() {
 function getDeviceContacts() {
 	var onSuccess = function(contacts) {     
 		for (i = 0; i < contacts.length; i++) {
-			console.log(contacts[i].displayName);
-			document.getElementById("contactList").innerHTML += "<li>" + contacts[i].displayName + "</li>";
+			console.log(contacts[i].displayName); 
+			document.getElementById("contactList").innerHTML += '<li>' + contacts[i].displayName + '</li>';
+				
 		}
 	};
 	
@@ -138,7 +139,7 @@ var saveContacts = function(jsonResponse) {
 		emailArray[0] = email;
 		contact.emails = emailArray;
 		
-		contact.save(onSuccess,onError);
+		//contact.save(onSuccess,onError);
 	}
 };
 	//ADDS CLICK LISTENERS TO THE CONTACTS AND BUTTONS (EXCEPT FOR THE SAVE NEW CONTACT BUTTON)
@@ -217,26 +218,6 @@ document.getElementById('submit').addEventListener("click", function(e) {
 		alert("Contact Added!");
 });
 
-//FUNCTION THAT GETS THE USERS CURRENT POSITION
-
-getGPSLocation = function(){
-	if(navigator.geolocation){
-		navigator.geolocation.getCurrentPosition(successCallback, errorCallback,
-		{
-		enableHighAccuracy: true,
-		timeout: 5000
-		});
-	}else{
-		
-	}
-};
-
-//FUNCTION THAT HANDLES WHEN THE GET POSITION FUNCTION RETURNS SUCCESS
-
-function successCallback(position){
-	alert("We found your location");
-}
-
 var onSuccess = function() {     
 };
 
@@ -244,11 +225,57 @@ var onError = function(contactError) {
 	alert("Error = " + contactError.code); 
 }
 
+//FUNCTION THAT GETS THE USERS CURRENT POSITION
+
+function getGPSLocation(){
+	console.log('whereami');
+        var success = function(position) {
+            console.log(JSON.stringify(position));
+            whatcity(position);
+        };
+        var failure = function() {
+            console.log("error");
+        };
+        navigator.geolocation.getCurrentPosition(success, failure, {
+            enableHighAccuracy: true
+        });
+};
+
+function whatcity(position) {
+	 var request = new XMLHttpRequest();
+        request.open("GET", 
+            "http://open.mapquestapi.com/geocoding/v1/reverse?key=Fmjtd|luur2hurn0%2Cbg%3Do5-9wasly&location=" +
+            position.coords.latitude + "," + position.coords.longitude, true);
+        request.onreadystatechange = function() {
+            if (request.readyState == 4) {
+                if (request.status == 200 || request.status == 0) {
+                    console.log(request.responseText);
+                    var obj = JSON.parse(request.responseText);
+                    var city = document.getElementById("city");
+                    city.value = obj.results[0].locations[0].adminArea5;
+					var street = document.getElementById("street");
+                    street.value = obj.results[0].locations[0].street;
+					var state = document.getElementById("postalCode");
+                    state.value = obj.results[0].locations[0].adminArea3;
+                }
+            }
+        };
+        request.send();
+}
+
+//FUNCTION THAT HANDLES WHEN THE GET POSITION FUNCTION RETURNS SUCCESS
+
+//function successCallback(position){
+	//alert("We found your location");
+//}
+
+
+
 //FUNCTION THAT HANDLES WHEN THE GET POSITION FUNCTION RETURNS AN ERROR
 
-function errorCallback(error){
-	alert("We can't find your current location. You will need to enter it manually.");
-}
+//function errorCallback(error){
+	//alert("We can't find your current location. You will need to enter it manually.");
+//}
 
 
 
