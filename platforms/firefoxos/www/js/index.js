@@ -43,14 +43,38 @@ var app = {
 
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');
-
-        console.log('Received Event: ' + id);
+		
+		console.log('Received Event: ' + id);
     }
 };
 
 document.addEventListener("online", function() {
 	getContacts();
+	getDeviceContacts();
 }, false);
+
+document.addEventListener("offline", function() {
+	alert("You do not have an internet connection");
+	getDeviceContacts();
+}, false);
+
+function getDeviceContacts() {
+	var onSuccess = function(contacts) {     
+		for (i = 0; i < contacts.length; i++) {
+			console.log(contacts[i].displayName);
+			document.getElementById("contactList").innerHTML += "<li>" + contacts[i].displayName + "</li>";
+		}
+	};
+	
+	var onError = function(contactError) {     
+		alert('onError!'); 
+	};
+	
+	var options = new ContactFindOptions(); 
+	options.filter   = ""; 
+	options.multiple = true; 
+	navigator.contacts.find(["*"], onSuccess, onError, options);
+}
 
 getContacts = function(){
 	var request = new XMLHttpRequest();
@@ -64,23 +88,12 @@ getContacts = function(){
 				console.log(request.responseText);
 				var jsonResponse = contactObject;
 				saveContacts(jsonResponse);
-				
-				for (var i in contactObject) { 
-					document.getElementById("contactList").innerHTML += "<li>" + contactObject[i].firstname + " " + contactObject[i].lastname + "</li>";
-				}
 			}       
 		}
 	}
 };
 
 var saveContacts = function(jsonResponse) {
-	console.log(jsonResponse[0].firstname)
-	console.log(jsonResponse[0].lastname)
-	console.log(jsonResponse[0].street)
-	console.log(jsonResponse[0].city)
-	console.log(jsonResponse[0].state)
-	console.log(jsonResponse[0].phone)
-	console.log(jsonResponse[0].email)
 	
 	for (i = 0; i < jsonResponse.length; i++) {
 		var firstName = jsonResponse[i].firstname;
@@ -127,32 +140,33 @@ var saveContacts = function(jsonResponse) {
 		
 		contact.save(onSuccess,onError);
 	}
-};//ADDS CLICK LISTENERS TO THE CONTACTS AND BUTTONS (EXCEPT FOR THE SAVE NEW CONTACT BUTTON)
+};
+	//ADDS CLICK LISTENERS TO THE CONTACTS AND BUTTONS (EXCEPT FOR THE SAVE NEW CONTACT BUTTON)
 	//THE CLICK LISTENER FOR THE CONTACTS IS JUST THE UL AS A WHOLE RIGHT NOW... WILL NEED TO BE CHANGED TO EACH INDIVIDUAL CONTACT
 	
 document.getElementById('contactList').addEventListener("click", function(e) {
-   document.getElementById('contacts').style.display="none";
-   document.getElementById('contactInfo').style.display="block";
-   document.getElementById('addContact').style.display="none";
+	document.getElementById('contacts').style.display="none";
+    document.getElementById('contactInfo').style.display="block";
+    document.getElementById('addContact').style.display="none";
 });
 
 document.getElementById('backBtn1').addEventListener("click", function(e) {
-   document.getElementById('contacts').style.display="block";
-   document.getElementById('contactInfo').style.display="none";
-   document.getElementById('addContact').style.display="none";
+    document.getElementById('contacts').style.display="block";
+    document.getElementById('contactInfo').style.display="none";
+    document.getElementById('addContact').style.display="none";
 });
 
 document.getElementById('backBtn2').addEventListener("click", function(e) {
-   document.getElementById('contacts').style.display="block";
-   document.getElementById('contactInfo').style.display="none";
-   document.getElementById('addContact').style.display="none";
+    document.getElementById('contacts').style.display="block";
+    document.getElementById('contactInfo').style.display="none";
+    document.getElementById('addContact').style.display="none";
 });
 
 document.getElementById('addBtn').addEventListener("click", function(e) {
-   document.getElementById('addContact').style.display="block";
-   document.getElementById('contacts').style.display="none";
-   document.getElementById('contactInfo').style.display="none";
-   getGPSLocation();
+	document.getElementById('addContact').style.display="block";
+    document.getElementById('contacts').style.display="none";
+    document.getElementById('contactInfo').style.display="none";
+    getGPSLocation();
 });
 
 document.getElementById('submit').addEventListener("click", function(e) {
@@ -236,9 +250,7 @@ function errorCallback(error){
 	alert("We can't find your current location. You will need to enter it manually.");
 }
 
-document.addEventListener("offline", function() {
-	alert("You do not have an internet connection")
-}, false);
+
 
 (function init() {     
 	app.initialize(); 
