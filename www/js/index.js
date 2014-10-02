@@ -159,6 +159,8 @@ document.getElementById('contactList').addEventListener("click", function(e) {
 	document.getElementById('contacts').style.display="none";
     document.getElementById('contactInfo').style.display="block";
     document.getElementById('addContact').style.display="none";
+	
+	editContact(e.target.id);
 });
 
 document.getElementById('backBtn1').addEventListener("click", function(e) {
@@ -179,6 +181,31 @@ document.getElementById('addBtn').addEventListener("click", function(e) {
     document.getElementById('contactInfo').style.display="none";
     getGPSLocation();
 });
+
+
+function editContact(contactID) {
+	alert(contactID);
+	
+	var onSuccess = function(contacts) {     
+		console.log(contacts[0].displayName);
+		
+		contactName.value = contacts[0].displayName;
+		contactPhone.value = contacts[0].phoneNumbers[0].value;
+		contactEmail.value = contacts[0].emails[0].value;
+		contactStreet.value = contacts[0].addresses[0].streetAddress;
+		contactCity.value = contacts[0].addresses[0].locality;
+		contactPostalCode.value = contacts[0].addresses[0].region;
+	};
+	
+	var onError = function(contactError) {     
+		alert('onError!'); 
+	};
+	
+	var options = new ContactFindOptions(); 
+	options.filter   = "Corey"; 
+	options.multiple = true; 
+	navigator.contacts.find(["*"], onSuccess, onError, options);
+}
 
 document.getElementById('submit').addEventListener("click", function(e) {
 	var firstName = document.getElementById('firstName').value;
