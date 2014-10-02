@@ -11,6 +11,10 @@
                         {
                             "xml": "<permission access=\"readwrite\" description=\"Required for accessing address book.\" name=\"contacts\" privileged=\"true\" />",
                             "count": 1
+                        },
+                        {
+                            "xml": "<permission description=\"Required for accessing user location.\" name=\"geolocation\" />",
+                            "count": 1
                         }
                     ]
                 }
@@ -22,6 +26,9 @@
             "PACKAGE_NAME": "com.algonquin.mad9135.assign1"
         },
         "org.apache.cordova.contacts": {
+            "PACKAGE_NAME": "com.algonquin.mad9135.assign1"
+        },
+        "org.apache.cordova.geolocation": {
             "PACKAGE_NAME": "com.algonquin.mad9135.assign1"
         }
     },
