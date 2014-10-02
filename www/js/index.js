@@ -16,8 +16,8 @@ var controller = {
         document.getElementById('ad_contact_button').addEventListener('click', this.onAddClick, false);
         document.getElementById('back_button').addEventListener('click', this.onCloseClick, false);
         document.getElementById('save_contact').addEventListener('click', this.onSaveClick, false);
-        document.getElementById('simple_list_button').addEventListener('click', this.onSimpleListClick, false);
-        document.getElementById('icon_list_button').addEventListener('click', this.onIconListClick, false);
+        //document.getElementById('simple_list_button').addEventListener('click', this.onSimpleListClick, false);
+        //document.getElementById('icon_list_button').addEventListener('click', this.onIconListClick, false);
     },
     onSimpleListClick: function()
     {
@@ -35,6 +35,7 @@ var controller = {
     {
     	 //ev.preventDefault();
     	 view.setReadOnly(false);
+         
     },
     onAddClick: function(ev)
     {
@@ -43,6 +44,8 @@ var controller = {
     	view.setReadOnly(false);
       	view.hideContactList();
     	view.showContactForm();
+        view.changeHeader("Add Contact");
+        view.hideEditButton();
     },
     onCloseClick: function(ev)
     {
@@ -78,6 +81,8 @@ var controller = {
     		view.updateFields(model.getContactById(ev.target.id));
 	      	view.hideContactList();
 	    	view.showContactForm();
+            view.changeHeader("Edit Contact");
+            view.showEditButton();
     	});
     },
     onDeviceReady: function()
