@@ -1,52 +1,7 @@
 /**
  * @author Thomas Wiegand
  */
-var jsonObj =[
-	{
-		firstname: "Sidney",
-		lastname: "Crosby",
-		street: "123 Main St.",
-		city: "Cole Harbour",
-		state: "Nova Scotia",
-		phone: "6135551111",
-		email: "sidney.crosby@penguins.nhl.com"
-	},
-	{
-		firstname: "Ryan",
-		lastname: "Getzlaf",
-		street: "123 Main St.",
-		city: "Regina",
-		state: "Saskatchewan",
-		phone: "613555112",
-		email: "ryan.getzlaf@ducks.nhl.com"
-	},
-	{
-		firstname: "Claude",
-		lastname: "Giroux",
-		street: "123 Main St.",
-		city: "Hearst",
-		state: "Ontario",
-		email: "claude.giroux@flyers.nhl.com"
-	},
-	{
-		firstname: "Tyler",
-		lastname: "Seguin",
-		street: "123 Main St.",
-		city: "Brampton",
-		state: "Ontario",
-		phone: "613555114",
-		email: "tyler.seguin@stars.nhl.com"
-	},
-	{
-		firstname: "Corey",
-		lastname: "Perry",
-		street: "123 Main St.",
-		city: "Peterborough",
-		state: "Ontario",
-		phone: "613555115",
-		email: "corey.perry@ducks.nhl.com"
-	}
-];
+var jsonObj;
 
 var model = {
 	_contacts:"",
@@ -68,10 +23,33 @@ var model = {
 		}
 		console.log('\n\nFound ' + contacts.length + ' contacts.\n' + strNames);
     },
-    getHockeyHeroesJson: function()
+
+     getHockeyHeroesJson: function()
     {
-    	this._jsonObj = jsonObj;
-    	this.hockeyHeroesJsonDone();
+        console.log("Ian: AJAX CALL");
+        var request = new XMLHttpRequest();
+
+
+        // add in the URL later
+        request.open("GET", "https://dl.dropboxusercontent.com/u/887989/MAD9135/contacts.json", true);
+            request.onreadystatechange = function()
+            {
+                if(request.readyState === 4)
+                {
+                    if(request.status=== 200 || request.status===0)
+                    {
+                    	console.log(request.responseText);
+
+                        model._jsonObj = JSON.parse(request.responseText);
+			            model.hockeyHeroesJsonDone();
+                    }
+                }
+
+            };
+
+            request.send();
+            console.log("IAN HERE");
+
     },
     hockeyHeroesJsonDone: function()
     {
@@ -102,10 +80,14 @@ var model = {
     },
     noContactFound: function(email)
     {
+
+
+
     	for(var i=0; i < this._contacts.length; i++)
     	{
+
     		var test = this._contacts[i].emails; 
-    		if(test)
+    		if(test && test.length > 0)
     		{
 	    		var current_email = this._contacts[i].emails[0].value;
 	    		if(email == current_email)
