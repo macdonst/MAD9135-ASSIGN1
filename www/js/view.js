@@ -1,6 +1,8 @@
 /**
  * @author Thomas Wiegand
  */
+
+var globalContact = "";
 var view = {
 	contacts:"",
 	contact:"",
@@ -173,7 +175,7 @@ var view = {
     },
     updateFields: function(contact)
     {
-		
+		globalContact = contact;
 		this.cleanFields();
 		this.contact_form_firstname.value = contact.name.givenName;
 		this.contact_form_lastname.value = contact.name.familyName;
@@ -200,6 +202,39 @@ var view = {
     },
     showEditButton: function(){
         document.getElementById('edit_form_button').style.visibility = "visible";
+    },
+    validateAndSetContactValues:function(contact)
+    {
+        console.log("validateAndSetContactValues");
+		var name = new ContactName();
+		name.givenName = this.contact_form_firstname.value;
+		name.familyName = this.contact_form_lastname.value;
+		name.formatted = this.contact_form_firstname.value + " " + this.contact_form_lastname.value;
+		contact.name = name;
+		
+		var addresses = [];
+		var contactAddress = new ContactAddress();
+		contactAddress.streetAddress = contact.addresses[0].streetAddress;
+        contactAddress.locality = contact.addresses[0].locality;
+        //contactAddress.region = obj.state;
+        addresses[0] = contactAddress;
+		contact.addresses = addresses;
+		
+		var emails = [];
+		var email = new ContactField();
+		email.value = this.contact_form_email.value;
+		emails[0] = email;
+		contact.emails = emails;
+		
+		var phoneNumberArray = [];
+		var phoneNumber = new ContactField();
+		phoneNumber.value = this.contact_form_phonenumber.value;
+		phoneNumber.pref = "true";
+		phoneNumber.type = "home";
+		phoneNumberArray[0] = phoneNumber;
+		contact.phoneNumbers = phoneNumberArray;
+        contact.save(function(contact){console.log("Saved!!");},function(contact){console.log("Error!!");});
+    	return contact;
     },
     closeContactForm: function()
     {

@@ -1,4 +1,5 @@
 var DEBUG_FIX = false;
+var contactID = 0;
             
 var controller = {
     //Constructor
@@ -10,7 +11,7 @@ var controller = {
     bindEvents: function()
     {
         document.addEventListener('contactListReady', this.onContactListReady, false);
-		 document.addEventListener('contactLocationReady', this.contactLocationReady, false);
+        document.addEventListener('contactLocationReady', this.contactLocationReady, false);
         document.addEventListener('offline', this.onOffline, false);
         document.addEventListener('online', this.onOnline, false);
         document.getElementById('edit_form_button').addEventListener('click', this.onEditClick, false);
@@ -64,6 +65,11 @@ var controller = {
     onSaveClick: function(ev)
     {
     	ev.preventDefault();
+        console.log("save click");
+        console.log("contact ID: "+ contactID);
+        console.log("Am I Here? "+ globalContact);
+        //var contact = model.getContactById(contactID);
+    	var model = view.validateAndSetContactValues(globalContact);
     	view.setReadOnly(true);
     },
     //Going Offline
@@ -87,6 +93,7 @@ var controller = {
     		ev.preventDefault();
     		view.setReadOnly(true);
     		view.updateFields(model.getContactById(ev.target.id));
+            model.getContact();
 	      	view.hideContactList();
 	    	view.showContactForm();
             view.changeHeader("Edit Contact");
