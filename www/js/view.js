@@ -131,8 +131,8 @@ var view = {
 		this.contact_form_city = this.makeInput("city", "text", "city","City");
 		form.appendChild(this.makeLabel("City ", this.contact_form_city));
 
-		//this.contact_form_postalcode = this.makeInput("postalcode", "text", "postalcode", "Postal Code");
-		//form.appendChild(this.makeLabel("Postal Code", this.contact_form_postalcode));
+		this.contact_form_postalcode = this.makeInput("postalcode", "text", "postalcode", "Postal Code");
+		form.appendChild(this.makeLabel("Postal Code", this.contact_form_postalcode));
 		
 		this.contact_form_email = this.makeInput("email", "email", "email", "Valid Email Address");
 		form.appendChild(this.makeLabel("Email ", this.contact_form_email));
@@ -157,7 +157,7 @@ var view = {
 		this.contact_form_lastname.disabled=isReadOnly;
 		this.contact_form_address.disabled=isReadOnly;
 		this.contact_form_city.disabled=isReadOnly;
-		//this.contact_form_postalcode.disabled=isReadOnly;
+		this.contact_form_postalcode.disabled=isReadOnly;
 		this.contact_form_email.disabled=isReadOnly;
 		this.contact_form_phonenumber.disabled=isReadOnly;
     },
@@ -167,7 +167,7 @@ var view = {
 		this.contact_form_lastname.value = "";
 		this.contact_form_address.value = "";
 		this.contact_form_city.value = "";
-		//this.contact_form_postalcode = "";
+		this.contact_form_postalcode = "";
 		this.contact_form_email.value = "";
 		this.contact_form_phonenumber.value = "";
     },
