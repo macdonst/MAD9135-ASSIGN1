@@ -1,0 +1,45 @@
+<ion-view  title=" ">
+
+    <ion-nav-buttons side="left">
+        <button class="button ion-ios7-arrow-back button-clear" ng-click="$state.go('contacts')">All Contacts</button>
+    </ion-nav-buttons>
+
+    <ion-nav-buttons side="right">
+        <button class="button button-clear button-positive" ng-click="saveEdit()">Save</button>
+    </ion-nav-buttons>
+
+    <ion-content padding="true">
+        <div class="list">
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">First Name</span>
+            <input type="text" place-holder="First Name" ng-model="selectedContact.name.givenName">
+          </label>
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">Last Name</span>
+            <input type="text" place-holder="First Name" ng-model="selectedContact.name.familyName">
+          </label>
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">Email</span>
+            <input type="email" place-holder="Email" ng-model="selectedContact.emails[0].value">
+          </label>
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">Phone</span>
+            <input type="tel" place-holder="Phone" ng-model="selectedContact.phoneNumbers[0].value">
+          </label>
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">Street</span>
+            <input type="text" place-holder="Street" ng-model="selectedContact.addresses[0].streetAddress">
+          </label>
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">City</span>
+            <input type="text" place-holder="City" ng-model="selectedContact.addresses[0].locality">
+          </label>
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">State</span>
+            <input type="text" place-holder="State" ng-model="selectedContact.addresses[0].region">
+          </label>
+        </div>
+    </ion-content>
+
+
+</ion-view>
