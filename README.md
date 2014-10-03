@@ -1,8 +1,5 @@
-MAD9135-ASSIGN1
-===============
+MAD9135 - Assign 1
 
-MAD9135 Assignment 1: Firefox OS App
-
-Group Members
-=============
-
+Members:
+- Timotius Oktorio (kimtimotius)
+- Ryan Haupt (haup0002)

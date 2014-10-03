@@ -1,0 +1,25 @@
+{
+    "launch_path": "/index.html",
+    "installs_allowed_from": [
+        "*"
+    ],
+    "version": "0.0.1",
+    "name": "Contacts App",
+    "pkgName": "com.algonquincollege.okto0001.mad9135-assign1",
+    "description": "MAD9135 Assignment 1",
+    "developer": {
+        "name": "Timotius Oktorio",
+        "url": "http://www.algonquincollege.com/okto0001"
+    },
+    "permissions": {
+        "geolocation": {
+            "description": "Required for accessing user location."
+        },
+        "contacts": {
+            "description": "Required for accessing address book.",
+            "access": "readwrite"
+        }
+    },
+    "type": "privileged",
+    "icons": {}
+}
