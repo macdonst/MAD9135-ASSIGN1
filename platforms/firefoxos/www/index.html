@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" />
+    <title>All Strings Attached Tennis</title>
+    <link rel="stylesheet" href="css/mystyles.css" />
+</head>
+
+<body>
+    <div id="header">
+        <div class="cButtons" id="backDiv" data-animation="animation-slide-out-left" data-page="1" style="display:none;float:left">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAKZJREFUeNpiYBgFo4BE8P////7/CNBAT4sFgHj/fzRAL8sNgPj8fyyAHpY7APH7/zgArS1P+E8A0NLy+f+JAHRLbHRxAL7ERisHMCInNiC1HogF6FisNDLCEhuQmj8QBRsjqGQD0gUDVbIy0q00G6wOYALiCQMaAtBECEoD/QPmgIHMhgNeEA2uonhQVEaDpjoeFA2SQdEkGxSN0kHRLB8FwxYABBgAzFg1RPY488IAAAAASUVORK5CYII=" />
+        </div>
+
+        <h1 id="hTitle">Contact King</h1>
+
+        <div class="cButtons" id="addDiv" data-animation="animation-slide-out-right" data-page="0">
+            <img id="addDivImg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAGNJREFUeNrs1rENwCAMBdHvKHtlNbKZN3PCAiAMBRJ3vdErkGwpUUSUaKSJLm0WIECAAAECNNhdF2Vi7ukt38SbbmZus9t5Ye8PKvwhQIC2jCMfECBAgAABahz5yTnXKX0CDADFA02ENFlW2QAAAABJRU5ErkJggg==" />
+        </div>
+    </div>
+
+    <!--
+<div class="cButtons" id="update" data-animation="animation-slide-out-left" data-page="1" style="display:none;float:right"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAO5JREFUeNrs2FENhDAMBuBJQMJJQMIknIQ5QsIknIRJQMJJOAm7NuGB5MjSQkubXP9kj2wfpKzLUopE/ji99wnGCuMDo3jF7VM84/wgAfHq4yyWuNoJcY2DNAvcQsRhbU5340rglHG4Uc/USR9CuKyBqxKfGxfcFlbBXaoJBg6TqW2nSRQuE1eokzbC3zUTX3QVxW0TXy5kNRyz/Rwimbiq3SN/kOq4k8jMfKZK7fzUBTFvk5MJE2nTXxlHI7vmz2j0dieTk0h6fzVA3otjIm1wDGRO1hmcVvxcWxwgfd2p7JC4oT/jCiwSiYzzFWAA4LFXPenyi00AAAAASUVORK5CYII=" /></div>
+</div>
+-->
+    <div id="wrapper">
+
+        <div data-role="page" id="page1" style="display:block;">
+            <div id="page1Container" class="pages animation-slide-in-left">
+            </div>
+        </div>
+
+        <div id="page2" data-role="page" style="display:none;">
+            <div id="page2Container" class="pages animation-slide-out-left">
+                <form class="contactForm" name="contactForm" data-identity="null">
+                    <fieldset>
+                        <div class="allNames">
+                            <input type="text" id="firstname" name="firstname" placeholder="Name" maxlength="40" value="">
+                        </div>
+                        <div class="allNames">
+                            <input type="text" id="lastname" name="lastname" placeholder="Last name" value="">
+                        </div>
+                        <div class="allNames">
+                            <input type="text" id="company" name="company" placeholder="Company" value="">
+                        </div>
+                        <div class="phoneNumbers">
+                            <div class="clearIt">
+                            <select name="numbertype0">
+                                <option value="Mobile" selected>Mobile</option>
+                                <option value="Home">Home</option>
+                                <option value="Work">Work</option>
+                                <option value="Personal">Personal</option>
+                            </select>
+                            <input type="tel" id="number0" name="number0" data-amount="1" placeholder="Phone" value="">
+                            </div>
+                            <button class="addExtra" data-extra="0">Add Phone Number<img src="img/plusextra.png" /></button>
+                        </div>
+                        <div class="emails">
+                            <div class="clearIt">
+                            <select name="emailtype0">
+                                <option value="Personal" selected>Personal</option>
+                                <option value="Home">Home</option>
+                                <option value="Work">Work</option>
+                            </select>
+                            <input type="email" id="email0" name="email0" data-amount="1" placeholder="Email" value="">
+                            </div>
+                            <button class="addExtra" data-extra="1">Add Email<img src="img/plusextra.png" /></button>
+                        </div>
+                        <div class="addresses">
+                            <div class="clearIt">
+                            <select name="addressestype0">
+                                <option value="Home" selected>Home</option>
+                                <option value="Work">Work</option>
+                                <option value="Cottage">Cottage</option>
+                            </select>
+                            <input type="text" class="street" id="street0" name="street0" placeholder="Street" value="">
+                            <input type="text" class="zipcode" id="zipcode0" name="zipcode0" placeholder="Zip code" value="">
+                            <input type="text" class="city" id="city0" name="city0" placeholder="City" value="">
+                            <input type="text" class="country" id="country0" name="country0" data-amount="1" placeholder="Country" value="">
+                            </div>
+                            <button class="addExtra" data-extra="2">Add Address<img src="img/plusextra.png" /></button>
+                        </div>
+                        <div class="birthday">
+                            <input type="date" id="birthday" name="birthday" placeholder="Birthday" value="">
+                        </div>
+                        <div class="comment">
+                            <input type="text" id="comment" name="comment" placeholder="Comment" value="">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/myscript.js"></script>
+</body>
+
+</html>
