@@ -1,0 +1,16 @@
+<ion-view title="All Contacts">
+
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-ios7-plus-empty" ng-click="$state.go('add')">
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content>
+    <ion-list>
+	  <ion-item ng-repeat="contact in contacts" ng-click="goDetails(contact)">
+	    {{contact.name.givenName}} {{contact.name.familyName}}
+	  </ion-item>
+	</ion-list>
+    </ion-content>
+
+</ion-view>
