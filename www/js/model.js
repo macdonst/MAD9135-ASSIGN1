@@ -134,11 +134,11 @@ var model = {
 		if (contactLocation.gotLocation){
        		contactAddress.streetAddress = contactLocation.street;
            contactAddress.locality = contactLocation.city;
-        	contactAddress.region = contactLocation.state;
+        	contactAddress.postalCode = contactLocation.postalCode;
         }else{
 			contactAddress.streetAddress = "";
         	contactAddress.locality = "";
-        	contactAddress.region = "";
+        	contactAddress.postalCode = "";
         }
 		
         addresses[0] = contactAddress;
@@ -266,6 +266,7 @@ var model = {
     	contact.emails = contact.emails ? contact.emails : contact.emails = []; 
     	contact.addresses = contact.addresses ? contact.addresses : contact.addresses = []; 
     	contact.phoneNumbers = contact.phoneNumbers ? contact.phoneNumbers : contact.phoneNumbers = [];
+        contact.postalCode = contact.postalCode ? contact.postalCode : contact.postalCode = [];
     	return contact; 
     },
     getContactById: function(id)

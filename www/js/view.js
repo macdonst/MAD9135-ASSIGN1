@@ -169,7 +169,7 @@ var view = {
 		this.contact_form_lastname.value = "";
 		this.contact_form_address.value = "";
 		this.contact_form_city.value = "";
-		this.contact_form_postalcode = "";
+		this.contact_form_postalcode.value = "";
 		this.contact_form_email.value = "";
 		this.contact_form_phonenumber.value = "";
     },
@@ -183,7 +183,7 @@ var view = {
 		{
 			this.contact_form_address.value = contact.addresses[0].streetAddress;
 			this.contact_form_city.value = contact.addresses[0].locality;
-			//this.contact_form_postalcode = contact.addresses[0].postalCode;
+			this.contact_form_postalcode.value = contact.addresses[0].postalCode;
 		}
 		if(contact.emails.length > 0)
 		{
@@ -211,11 +211,14 @@ var view = {
 		name.familyName = this.contact_form_lastname.value;
 		name.formatted = this.contact_form_firstname.value + " " + this.contact_form_lastname.value;
 		contact.name = name;
+        contact.displayName = name.formatted;
+        console.log(contact.displayName);
 		
 		var addresses = [];
 		var contactAddress = new ContactAddress();
-		contactAddress.streetAddress = contact.addresses[0].streetAddress;
-        contactAddress.locality = contact.addresses[0].locality;
+		contactAddress.streetAddress = this.contact_form_address.value;
+        contactAddress.locality = this.contact_form_city.value;
+        contactAddress.postalCode = this.contact_form_postalcode.value;
         //contactAddress.region = obj.state;
         addresses[0] = contactAddress;
 		contact.addresses = addresses;
@@ -233,7 +236,7 @@ var view = {
 		phoneNumber.type = "home";
 		phoneNumberArray[0] = phoneNumber;
 		contact.phoneNumbers = phoneNumberArray;
-        contact.save(function(contact){console.log("Saved!!");},function(contact){console.log("Error!!");});
+        contact.save(function(contact){model.prepareContactList(); console.log("Saved!!");},function(contact){console.log("Error!!");});
     	return contact;
     },
     closeContactForm: function()
